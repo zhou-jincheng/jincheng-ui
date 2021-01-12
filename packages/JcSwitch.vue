@@ -1,0 +1,118 @@
+<template>
+    <label class="jc-switch"
+    :class="{'is-checked': value}">
+      <span class="jc-switch_core" ref="core">
+        <span class="jc-switch_button"></span>
+      </span>
+      <input
+      type="checkbox"
+      :checked="value"
+      :name="name"
+      @change="handleChange"
+      class="jc-switch_input">
+    </label>
+</template>
+
+<script>
+export default {
+  name: 'JcSwitch',
+  data () {
+    return {
+
+    }
+  },
+  props: {
+    value: {
+      type: Boolean,
+      default: false
+    },
+    activeColor: {
+      type: String,
+      default: ''
+    },
+    inactiveColor: {
+      type: String,
+      default: ''
+    },
+    name: {
+      type: String,
+      default: ''
+    }
+  },
+  methods: {
+    handleChange () {
+      this.$emit('input', !this.value)
+      this.$emit('change')
+    },
+    setColor () {
+      if (this.activeColor || this.inactiveColor) {
+        const color = this.value ? this.activeColor : this.inactiveColor
+        this.$refs.core.style.borderColor = color
+        this.$refs.core.style.backgroundColor = color
+      }
+    }
+  },
+  mounted () {
+    this.setColor()
+  },
+  watch: {
+    value () {
+      this.setColor()
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+.jc-switch{
+  display: inline-block;
+  align-items: center;
+  position: relative;
+  font-size: 14px;
+  line-height: 20px;
+  vertical-align: middle;
+  .jc-switch_core{
+  margin: 0;
+  display: inline-block;
+  position: relative;
+  width: 40px;
+  height: 20px;
+  border: 1px solid #dcdfe6;
+  outline: none;
+  border-radius: 10px;
+  box-sizing: border-box;
+  background: #dcdfe6;
+  cursor: pointer;
+  transition: border-color .3s,background-color .3s;
+  vertical-align: middle;
+  .jc-switch_button{
+    position:absolute;
+    top: 1px;
+    left: 1px;
+    border-radius: 100%;
+    transition: all .3s;
+    width: 16px;
+    height: 16px;
+    background-color: #fff;
+    }
+  }
+}
+// 选中样式
+.is-checked {
+  .jc-switch_core{
+    border-color: #409eff;
+    background-color: #409eff;
+    .jc-switch_button {
+      transform: translateX(20px);
+    }
+  }
+}
+// 隐藏input标签
+.jc-switch_input{
+  position:absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  margin: 0;
+}
+</style>

@@ -1,13 +1,14 @@
 - 安装组件库
 
-    npm add jincheng-ui
+    npm i jincheng-ui --save
 
 - 全局导入
 
-    import JcUI from 'jincheng-ui'
-    import 'jincheng-ui/lib/jc-ui.css'
+    import JinchengUI from 'jincheng-ui'
+
+    import 'jjincheng-ui/dist/jincheng-ui.css'
     
-    Vue.use(JcUI)
+    Vue.use(JinchengUI)
 
 - 使用组件
 
